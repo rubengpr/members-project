@@ -8,6 +8,9 @@ import newRouter from './routes/newRouter.mjs'
 import registerRouter from './routes/registerRouter.mjs';
 import session from 'express-session';
 import passport from 'passport';
+import dotenv from 'dotenv';
+dotenv.config(); // This loads the .env variables
+
 
 const app = express(); // Creates an instance of express() and saves it in a variable
 
