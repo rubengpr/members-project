@@ -1,5 +1,5 @@
 import { registerUser } from '../db/queries.mjs';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 let hashedPassword;
 

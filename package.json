@@ -4,17 +4,17 @@
   "type": "module",
   "main": "index.mjs",
   "scripts": {
-  "start": "node index.mjs",
-  "build": "echo 'Nothing to build'",
-  "predeploy": "npm run build",
-  "test": "echo \"Error: no test specified\" && exit 1"
-},
+    "start": "node index.mjs",
+    "build": "echo 'Nothing to build'",
+    "predeploy": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",

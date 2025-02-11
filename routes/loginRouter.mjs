@@ -2,7 +2,8 @@ import { Router } from 'express';
 const loginRouter = Router();
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
+
 
 passport.use(
     new LocalStrategy(async (username, password, done) => {
