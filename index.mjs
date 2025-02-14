@@ -16,7 +16,7 @@ const app = express(); // Creates an instance of express() and saves it in a var
 
 app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
 app.use(passport.session());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 // Convert __dirname using import.meta.url
 const __filename = fileURLToPath(import.meta.url);

@@ -1,32 +1,55 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Register</title>
-    </head>
-    <body>
-        <h1>Register Page</h1>
-        <form action="/register" method="post">
-            <div class="label-input">
-                <label for="register-firstname">First name</label>
-                <input id="register-firstname" type="text" name="first_name" placeholder="John">
-            </div>
-            <div class="label-input">
-                <label for="register-lastname">Last name</label>
-                <input id="register-lastname" type="text" name="last_name" placeholder="Doe">
-            </div>
-            <div class="label-input">
-                <label for="register-username">Username</label>
-                <input id="register-username" type="text" name="username" placeholder="johndoe">
-            </div>
-            <div class="label-input">
-                <label for="register-password">Password</label>
-                <input id="register-password" type="password" name="password">
-            </div>
-            <div class="label-input">
-                <label for="repeat-password">Repeat password</label>
-                <input id="repeat-password" type="password" name="repeat-password">
-            </div>
-            <button type="submit">Register</button>
-        </form>
-        <p><a href="/login">Back to login</a></p>
-    </body>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Register Page</h1>
+
+    <form action="/register" method="post">
+        <div class="label-input">
+            <label for="register-firstname">First name</label>
+            <input id="register-firstname" type="text" name="first_name" placeholder="John">
+        </div>
+
+        <div class="label-input">
+            <label for="register-lastname">Last name</label>
+            <input id="register-lastname" type="text" name="last_name" placeholder="Doe">
+        </div>
+
+        <div class="label-input">
+            <label for="register-username">Username</label>
+            <input id="register-username" type="text" name="username" placeholder="johndoe">
+            <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+                <% errors.forEach(error => { %>
+                    <% if (error.path === 'username') { %>
+                        <p class="error"><%= error.msg %></p>
+                    <% } %>
+                <% }) %>
+            <% } %>
+        </div>
+
+        <div class="label-input">
+            <label for="register-password">Password</label>
+            <input id="register-password" type="password" name="password">
+            <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+                <% errors.forEach(error => { %>
+                    <% if (error.path === 'password') { %>
+                        <p class="error"><%= error.msg %></p>
+                    <% } %>
+                <% }) %>
+            <% } %>
+        </div>
+
+        <div class="label-input">
+            <label for="repeat-password">Repeat password</label>
+            <input id="repeat-password" type="password" name="repeatPassword">      
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p><a href="/login">Back to login</a></p>
+</body>
 </html>
