@@ -6,8 +6,7 @@ let hashedPassword;
 
 async function postUser(req, res) {
     const errors = validationResult(req);
-    console.log('Validation errors:', errors.array()); // Debugging
-    console.log('Request body:', req.body);
+    console.log(errors.array());
 
     if (!errors.isEmpty()) {
         return res.render('register', { errors: errors.array(), formData: req.body });

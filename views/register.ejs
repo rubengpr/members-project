@@ -10,17 +10,17 @@
     <form action="/register" method="post">
         <div class="label-input">
             <label for="register-firstname">First name</label>
-            <input id="register-firstname" type="text" name="first_name" placeholder="John">
+            <input id="register-firstname" type="text" name="first_name" placeholder="John" value="<%= formData && formData.first_name ? formData.first_name : '' %>">
         </div>
 
         <div class="label-input">
             <label for="register-lastname">Last name</label>
-            <input id="register-lastname" type="text" name="last_name" placeholder="Doe">
+            <input id="register-lastname" type="text" name="last_name" placeholder="Doe" value="<%= formData && formData.last_name ? formData.last_name : '' %>">
         </div>
 
         <div class="label-input">
             <label for="register-username">Username</label>
-            <input id="register-username" type="text" name="username" placeholder="johndoe">
+            <input id="register-username" type="text" name="username" placeholder="johndoe" value="<%= formData && formData.username ? formData.username : '' %>">
             <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
                 <% errors.forEach(error => { %>
                     <% if (error.path === 'username') { %>
@@ -32,7 +32,7 @@
 
         <div class="label-input">
             <label for="register-password">Password</label>
-            <input id="register-password" type="password" name="password">
+            <input id="register-password" type="password" name="password" value="<%= formData && formData.password ? formData.password : '' %>">
             <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
                 <% errors.forEach(error => { %>
                     <% if (error.path === 'password') { %>
@@ -44,7 +44,14 @@
 
         <div class="label-input">
             <label for="repeat-password">Repeat password</label>
-            <input id="repeat-password" type="password" name="repeatPassword">      
+            <input id="repeat-password" type="password" name="repeatPassword" value="<%= formData && formData.repeatPassword ? formData.repeatPassword : '' %>"> 
+            <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+                <% errors.forEach(error => { %>
+                    <% if (error.path === 'repeatPassword') { %>
+                        <p class="error"><%= error.msg %></p>
+                    <% } %>
+                <% }) %>
+            <% } %>
         </div>
 
         <button type="submit">Register</button>
