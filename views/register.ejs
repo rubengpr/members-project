@@ -11,11 +11,25 @@
         <div class="label-input">
             <label for="register-firstname">First name</label>
             <input id="register-firstname" type="text" name="first_name" placeholder="John" value="<%= formData && formData.first_name ? formData.first_name : '' %>">
+            <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+                <% errors.forEach(error => { %>
+                    <% if (error.path === 'first_name') { %>
+                        <p class="error"><%= error.msg %></p>
+                    <% } %>
+                <% }) %>
+            <% } %>
         </div>
 
         <div class="label-input">
             <label for="register-lastname">Last name</label>
             <input id="register-lastname" type="text" name="last_name" placeholder="Doe" value="<%= formData && formData.last_name ? formData.last_name : '' %>">
+            <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+                <% errors.forEach(error => { %>
+                    <% if (error.path === 'last_name') { %>
+                        <p class="error"><%= error.msg %></p>
+                    <% } %>
+                <% }) %>
+            <% } %>
         </div>
 
         <div class="label-input">

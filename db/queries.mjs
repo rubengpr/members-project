@@ -1,5 +1,4 @@
 import pool from './pool.mjs';
-import { hashedPassword } from '../controllers/registerController.mjs';
 
 async function registerUser(first_name, last_name, username, hashedPassword) {
     try {
@@ -9,4 +8,14 @@ async function registerUser(first_name, last_name, username, hashedPassword) {
     }
   };
 
-export { registerUser };
+async function getUsernames() {
+  try {
+    const result = await pool.query("SELECT username FROM users");
+    console.log(result.rows);
+    return result.rows;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { registerUser, getUsernames };

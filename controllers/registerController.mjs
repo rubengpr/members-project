@@ -1,8 +1,18 @@
-import { registerUser } from '../db/queries.mjs';
+import { getUsernames, registerUser } from '../db/queries.mjs';
 import bcrypt from 'bcryptjs';
 import { validationResult } from 'express-validator';
 
-let hashedPassword;
+
+async function checkUsernames(value, {req}) {
+    const { username } = req.body;
+    
+    const existingUsernames = await getUsernames();
+    const usernamesArray = existingUsernames.map(user => user.username);
+
+    if (usernamesArray.includes(username)) {
+        throw new Error('Username is already taken');
+    }
+}
 
 async function postUser(req, res) {
     const errors = validationResult(req);
@@ -13,11 +23,11 @@ async function postUser(req, res) {
     }
 
     const { first_name, last_name, username, password } = req.body;
-    hashedPassword = await bcrypt.hash(password, 10);
+    let hashedPassword = await bcrypt.hash(password, 10);
     await registerUser(first_name, last_name, username, hashedPassword);
     res.redirect('/');
 };
 
-export { postUser, hashedPassword };
+export { postUser, checkUsernames };
 
 //app.post('/create-user', body('password').isLength({ min: 5 }), (req, res) => { });
