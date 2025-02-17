@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Dashboard</title>
+    </head>
+    <body>
+        <% if (user && user.membership === 'true') { %>
+            <p>Hi, <%= user.username %></p>
+            <p>You're a member!</p>
+           <% } else { %>
+            <p>Hi, guest %></p>
+            <p>You're not yet a member. <a href="/login">Login</a></p>
+        <% }; %>
+    </body>
+</html>

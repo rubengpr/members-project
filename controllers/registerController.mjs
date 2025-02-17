@@ -16,7 +16,6 @@ async function checkUsernames(value, {req}) {
 
 async function postUser(req, res) {
     const errors = validationResult(req);
-    console.log(errors.array());
 
     if (!errors.isEmpty()) {
         return res.render('register', { errors: errors.array(), formData: req.body });
@@ -25,7 +24,7 @@ async function postUser(req, res) {
     const { first_name, last_name, username, password } = req.body;
     let hashedPassword = await bcrypt.hash(password, 10);
     await registerUser(first_name, last_name, username, hashedPassword);
-    res.redirect('/');
+    res.redirect('/secretcode');
 };
 
 export { postUser, checkUsernames };

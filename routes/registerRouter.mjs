@@ -5,7 +5,7 @@ import { body } from 'express-validator';
 
 registerRouter.get('/', (req, res) => {
     res.render('register', { formData: req.body });
-})
+});
 
 registerRouter.post("/",
     [

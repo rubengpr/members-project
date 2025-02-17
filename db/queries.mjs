@@ -11,7 +11,6 @@ async function registerUser(first_name, last_name, username, hashedPassword) {
 async function getUsernames() {
   try {
     const result = await pool.query("SELECT username FROM users");
-    console.log(result.rows);
     return result.rows;
   } catch (error) {
     console.error(error);
