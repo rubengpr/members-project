@@ -4,7 +4,10 @@
     </head>
     <body>
         <h1>New message</h1>
-        <input type="text" placeholder="Message title">
-        <input type="text" placeholder="Message text">
+        <form action="/new" method="post">
+            <input type="text" name="message_title" placeholder="Message title">
+            <input type="text" name="message_text" placeholder="Message text">
+            <button type="submit">Sumbit</button>
+        </form>
     </body>
 </html>

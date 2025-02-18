@@ -38,7 +38,7 @@ app.use('/register', registerRouter);
 app.use('/', indexRouter);
 app.use('/new', newRouter);
 app.use('/secretcode', secretcodeRouter);
-app.use('/dashboard', dashboardRouter);
+app.use('/dashboard', dashboardRouter);  
 
 const PORT = 3000;
 app.listen(PORT, () => {

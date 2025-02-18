@@ -5,10 +5,11 @@
     <body>
         <% if (user && user.membership === 'true') { %>
             <p>Hi, <%= user.username %></p>
-            <p>You're a member!</p>
+            <p>You're a member! You can create messages now</p>
+            <a href="/new">Create a new message</a>
            <% } else { %>
             <p>Hi, guest %></p>
-            <p>You're not yet a member. <a href="/login">Login</a></p>
+            <p>Log in to create a new message. <a href="/login">Login</a></p>
         <% }; %>
     </body>
 </html>
