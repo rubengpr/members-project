@@ -3,22 +3,31 @@
         <title>Dashboard</title>
     </head>
     <body>
-        <% if (user && user.membership === 'true') { %>
-            <p>Hi, <%= user.username %></p>
+            <% if (user) { %>
+                <p>Hi, <%= user.username %></p>
+            <% } else { %>
+                <p>Hi, guest</p>
+            <% } %>
             <p>See here the latest messages</p>
             <ul>
                 <% messages.forEach(function(message) { %>
-                    <li>Author: <%= message.author %></li>
-                    <li>Date: <%= message.timestamp %></li>
-                    <li>Message title: <%= message.title %></li>
-                    <li>Message text: <%= message.text %></li>
+                    <% if (user) { %>
+                        <li>Author: <%= message.author %></li>
+                        <li>Date: <%= message.timestamp %></li>
+                        <li>Message title: <%= message.title %></li>
+                        <li>Message text: <%= message.text %></li>
+                    <% } else { %>
+                        <li>Author: Anon</li>
+                        <li>Date: ???</li>
+                        <li>Message title: <%= message.title %></li>
+                        <li>Message text: <%= message.text %></li>
+                    <% } %>
                 <% }) %>
-                
             </ul>
-            <a href="/new">Create a new message</a>
-           <% } else { %>
-            <p>Hi, guest %></p>
-            <p>Log in to create a new message. <a href="/login">Login</a></p>
-        <% }; %>
+            <% if (user) { %>
+                <a href="/new">Create a new message</a>
+            <% } else { %>
+                <p>Log in to create a new message. <a href="/login">Login</a></p>
+            <% } %>
     </body>
 </html>
