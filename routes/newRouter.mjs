@@ -1,9 +1,9 @@
 import { Router } from 'express';
 const newRouter = Router();
-import { createMessage } from '../controllers/newController.mjs';
+import {createMessage } from '../controllers/newController.mjs';
 
 newRouter.get('/', (req, res) => {
-    res.render('new');
+    res.render('new')
 });
 
 newRouter.post('/', createMessage);

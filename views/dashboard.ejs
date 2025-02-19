@@ -5,7 +5,16 @@
     <body>
         <% if (user && user.membership === 'true') { %>
             <p>Hi, <%= user.username %></p>
-            <p>You're a member! You can create messages now</p>
+            <p>See here the latest messages</p>
+            <ul>
+                <% messages.forEach(function(message) { %>
+                    <li>Author: <%= message.author %></li>
+                    <li>Date: <%= message.timestamp %></li>
+                    <li>Message title: <%= message.title %></li>
+                    <li>Message text: <%= message.text %></li>
+                <% }) %>
+                
+            </ul>
             <a href="/new">Create a new message</a>
            <% } else { %>
             <p>Hi, guest %></p>

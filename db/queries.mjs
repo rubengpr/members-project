@@ -17,6 +17,15 @@ async function getUsernames() {
   }
 }
 
+async function getMessages() {
+  try {
+    const result = await pool.query("SELECT * FROM messages");
+    return result.rows;
+  } catch {
+    console.error(error);
+  }
+}
+
 async function postMessage(message_title, message_text, username) {
   try {
     await pool.query("INSERT INTO messages (title, text, author, timestamp) VALUES ($1, $2, $3, CURRENT_TIMESTAMP)", [message_title, message_text, username]);
@@ -25,4 +34,4 @@ async function postMessage(message_title, message_text, username) {
   }
 }
 
-export { registerUser, getUsernames, postMessage };
+export { registerUser, getUsernames, getMessages, postMessage };
