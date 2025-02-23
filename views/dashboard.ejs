@@ -16,6 +16,9 @@
                         <li>Date: <%= message.timestamp %></li>
                         <li>Message title: <%= message.title %></li>
                         <li>Message text: <%= message.text %></li>
+                        <% if (user.isadmin === true) { %>
+                            <button data-id="<% message.id %>">Delete message <%= message.id %></button>
+                        <% } %>
                     <% } else { %>
                         <li>Author: Anon</li>
                         <li>Date: ???</li>
