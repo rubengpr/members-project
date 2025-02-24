@@ -15,17 +15,20 @@ datasource db {
 
 model Users {
   id  Int   @id @default(autoincrement())
-  first_name String?
-  last_name String?
-  username String
+  first_name String @db.VarChar(12)
+  last_name String? @db.VarChar(12)
+  username String @db.VarChar(20)
   password String
   membership Boolean
+  messages Messages[] //One-to-Many
 }
 
 model Messages {
   id  Int   @id @default(autoincrement())
-  message_title String
-  message_text String
-  message_author String
-  created_at DateTime
+  message_title String @db.VarChar(200)
+  message_text String @DB.VarChar(5000)
+  created_at DateTime @default(now())
+  
+  author Users @relation(fields: [authorId], references: [id])
+  authorId Int //Foreign key linking to Users.id
 }
