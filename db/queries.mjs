@@ -1,8 +1,18 @@
-import pool from './pool.mjs';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 async function registerUser(first_name, last_name, username, hashedPassword) {
-    try {
-        await pool.query("INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4)", [first_name, last_name, username, hashedPassword]);
+    try {  
+      await prisma.users.create({
+        data: {
+          first_name,
+          last_name,
+          username,
+          password: hashedPassword,
+          membership: false,
+        },
+      });
        } catch (error) {
           console.error(error);
     }
@@ -10,8 +20,8 @@ async function registerUser(first_name, last_name, username, hashedPassword) {
 
 async function getUsernames() {
   try {
-    const result = await pool.query("SELECT username FROM users");
-    return result.rows;
+    const users = await prisma.users.findMany();
+    return users;
   } catch (error) {
     console.error(error);
   }
@@ -19,19 +29,31 @@ async function getUsernames() {
 
 async function getMessages() {
   try {
-    const result = await pool.query("SELECT * FROM messages");
-    return result.rows;
+    const messages = await prisma.messages.findMany();
+    return messages;
   } catch {
     console.error(error);
   }
 }
 
 async function postMessage(message_title, message_text, username) {
-  try {
-    await pool.query("INSERT INTO messages (title, text, author, timestamp) VALUES ($1, $2, $3, CURRENT_TIMESTAMP)", [message_title, message_text, username]);
-  } catch (error) {
-    console.error(error);
+  const user = await prisma.users.findUnique({
+    where: { username },
+    select: { id: true }
+  });
+
+  if (!user) {
+    throw new Error("User not found");
   }
-}
+
+
+  await prisma.messages.create({
+    data: {
+      message_title,
+      message_text,
+      authorId: user.id,
+    },
+  })
+};
 
 export { registerUser, getUsernames, getMessages, postMessage };
